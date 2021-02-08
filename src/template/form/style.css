@@ -1,0 +1,50 @@
+.form {
+    background-color: blanchedalmond;
+    padding-left: 4%;
+    padding-right: 4%;
+    padding-top: 1%;
+    display: float;
+    float: left;
+    margin-top: 0.2%;
+    margin-left: 0.2%;
+    width: 30%;
+    box-sizing: border-box;
+    border-right: black 0.8px solid;
+    border-top: black 0.8px solid;
+    border-bottom: black 0.8px solid;
+}
+
+input[type=text],input[type=date] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.label {
+    padding-right: 5%;
+}
+
+.jenisKelamin , .hobby {
+    padding-right: 5%;
+    padding-left: 2%;
+    padding-bottom: 2%;
+}
+  
+button {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 9px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+  
+button:hover {
+    background-color: #45a049;
+}

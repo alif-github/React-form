@@ -1,0 +1,10 @@
+.header {
+    background-color: rgb(193, 193, 230);
+    margin: auto;
+    text-align: center;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    border-bottom: black solid;
+    font-size: 150%;
+    box-sizing: border-box;
+}

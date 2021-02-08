@@ -1,0 +1,30 @@
+.pagination {
+    background-color: blanchedalmond;
+    width: fit-content;
+    padding: 2px;
+    margin-left: auto;
+    margin-right: 61.1%;
+    /* margin-top: 30%; */
+}
+
+.page {
+    text-decoration: none;
+    color: black;
+    background-color: blanchedalmond;
+    padding: 2px;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.page:hover {
+    text-decoration: none;
+    color: black;
+    background-color: chartreuse;
+    padding: 2px;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+#nowPage {
+    background-color: chartreuse;
+}
