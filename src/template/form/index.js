@@ -11,10 +11,10 @@ class Form extends Component {
             tanggalLahir: "",
             tempatLahir: "",
             gender: "",
-            hobby: "",
+            hobby: [],
             alamat: "",
             agama: "",
-            umur: ""
+            umur: "",
          };
     }
 
@@ -32,14 +32,29 @@ class Form extends Component {
             console.log(tanggalLahir)
             const umurx = new Date(tanggalLahir)
             const tahunIni= new Date()
-            var age = tahunIni.getFullYear() - umurx.getFullYear();
-            const umurs = age
-            console.log("ini umur : ",umur)
+            var year = 0;
+            if (umurx.getMonth() < tahunIni.getMonth()) {
+                year = 1;
+            }
+            else if ((umurx.getMonth() === tahunIni.getMonth()) && umurx.getDate() < tahunIni.getDate()) {
+                year = 1;
+            } 
+            var age = tahunIni.getFullYear() - umurx.getFullYear() - year;
+
             this.setState({
-                umur: umurs
+                umur: age
             })
         }
         console.log(this.state)
+    }
+
+    setHobby = el => {
+        if (el.target.checked === true) {
+            this.state.hobby.push(el.target.value + " ")
+        } else {
+            this.state.hobby.splice(el.target.value, 1)
+        }
+        console.log("testing : ",this.state)
     }
 
     render() { 
@@ -73,12 +88,12 @@ class Form extends Component {
                     <br></br>
                     <div className="field">
                         <Label className="label" htmlFor="hobby">Hobby : </Label>
-                        <Input type="checkbox" id="hobby" className="hobby" name="hobby" value="Berenang" onChange={this.setValue}/>
+                        <Input type="checkbox" id="hobby" className="hobby" name="hobby" value="Berenang" onChange={this.setHobby}/>
                         <Label className="hobby" htmlFor="berenang"> Renang</Label>
-                        <Input type="checkbox" id="hobby" className="hobby" name="hobby" value="Jogging" onChange={this.setValue}/>
+                        <Input type="checkbox" id="hobby" className="hobby" name="hobby" value="Jogging" onChange={this.setHobby}/>
                         <Label className="hobby" htmlFor="jogging"> Lari</Label>
-                        <Input type="checkbox" id="hobby" className="hobby" name="hobby" value="Bersepeda" onChange={this.setValue}/>
-                        <Label className="hobby" htmlFor="bersepeda"> Futsal</Label>
+                        <Input type="checkbox" id="hobby" className="hobby" name="hobby" value="Bersepeda" onChange={this.setHobby}/>
+                        <Label className="hobby" htmlFor="bersepeda">Bike</Label>
                     </div>
                     <br></br>
                     <div className="field">

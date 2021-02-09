@@ -8,27 +8,34 @@ class TableForm extends Component {
             users:[]
          }
     }
-    render() { 
+
+    delete=(index)=>{
+        this.props.needindex(index)
+    }
+
+    render() {
         return (
             <table id="customers" cellSpacing="0" border="1">
-                <tr>
-                    <th colSpan="2">Cari:</th>
-                    <th colSpan="7">
-                        <input type="text" id="inputFind" onKeyUp="findPerson()" placeholder="Search for names.."
-                            title="Type in a name" />
-                    </th>
-                </tr>
-                <tr>
-                    <th className="tNumber">ID</th>
-                    <th className="tText">Nama</th>
-                    <th className="tText">Tempat Lahir</th>
-                    <th className="tNumber">Umur</th>
-                    <th className="tText">Gender</th>
-                    <th className="tText">Hobby</th>
-                    <th className="tText">Agama</th>
-                    <th className="tText">Alamat</th>
-                    <th className="tAction">Action</th>
-                </tr>
+                <thead>
+                    <tr>
+                        <th colSpan="2">Cari:</th>
+                        <th colSpan="7">
+                            <input type="text" id="inputFind" placeholder="Search for names.."
+                                title="Type in a name" />
+                        </th>
+                    </tr>
+                    <tr>
+                        <th className="tNumber">ID</th>
+                        <th className="tText">Nama</th>
+                        <th className="tText">Tempat Lahir</th>
+                        <th className="tNumber">Umur</th>
+                        <th className="tText">Gender</th>
+                        <th className="tText">Hobby</th>
+                        <th className="tText">Agama</th>
+                        <th className="tText">Alamat</th>
+                        <th className="tAction">Action</th>
+                    </tr>
+                </thead>
                 <tbody className="bodyFillTable" id="bodyTable">
                     {
                         this.props.users.map((user, idx) => {
@@ -44,10 +51,10 @@ class TableForm extends Component {
                                     <td>{user.agama}</td>
                                     <td>{user.alamat}</td>
                                     <td>
-                                        <button class="buttonedit" type="button" onclick="editClicked(${people[j].id})">
+                                        <button className="buttonedit" type="button" onclick="editClicked(${people[j].id})">
                                             Edit
                                         </button>
-                                        <button class="buttondelete" type="button" onclick="deleteClicked(${people[j].id})">
+                                        <button className="buttondelete" type="button" onClick={()=>this.delete(idx)}>
                                             delete
                                         </button>
                                     </td>

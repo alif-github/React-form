@@ -18,13 +18,15 @@ class App extends Component {
     newUsers.push({
         fullname, tanggalLahir, tempatLahir, gender, hobby, alamat, agama, umur
     })
+
+
     if(
         //validation success
         //that is condition 'if' , if state fill in (good)
-        user.fullname != "" && 
-        user.tanggalLahir != "" &&
-        user.tempatLahir != "" &&
-        user.agama != ""
+        user.fullname !== "" && 
+        user.tanggalLahir !== "" &&
+        user.tempatLahir !== "" &&
+        user.agama !== ""
         ) {
         alert('Success Added: ' + user.fullname + ' , Thank you for fullfill this form!');
         console.log(this.state.users);
@@ -37,14 +39,22 @@ class App extends Component {
         alert('Please fill all form data')
         console.log(this.state);
     }
-}
+  }
+
+  delete = (index) => {
+    let newPeople = this.state.users
+    newPeople.splice(index,1)
+    this.setState({
+      users: newPeople
+    })
+  }
 
   render() { 
     return ( 
       <>
       <Header/>
       <Form save={this.save}/>
-      <TableForm users={this.state.users}/>
+      <TableForm needindex={this.delete} users={this.state.users}/>
       <Paggination/>
     </>
      );
