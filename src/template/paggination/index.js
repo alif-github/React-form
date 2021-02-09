@@ -10,9 +10,9 @@ class Paggination extends Component {
         return (
             <> 
                 <div className="pagination">
-                    <a href="#" className="page" id="previous" onclick="prevPage();return false"></a>
+                    <a href="#" className="page" id="previous"></a>
                     <a href="#" className="page" id="nowPage"></a>
-                    <a href="#" className="page" id="next" onclick="nextPage();return false"></a>
+                    <a href="#" className="page" id="next"></a>
                     | page : <span id="page"></span>
                 </div>
             </>
