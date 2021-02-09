@@ -13,10 +13,10 @@ class App extends Component {
   //handle button to send it the user input
   save = user => {
     console.log(this.state);
-    const {fullname, tanggalLahir, tempatLahir, gender, hobby, alamat, agama} = user
+    const {fullname, tanggalLahir, tempatLahir, gender, hobby, alamat, agama, umur} = user
     let newUsers = this.state.users
     newUsers.push({
-        fullname, tanggalLahir, tempatLahir, gender, hobby, alamat, agama
+        fullname, tanggalLahir, tempatLahir, gender, hobby, alamat, agama, umur
     })
     if(
         //validation success

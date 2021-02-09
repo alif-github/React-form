@@ -13,22 +13,37 @@ class Form extends Component {
             gender: "",
             hobby: "",
             alamat: "",
-            agama: ""
+            agama: "",
+            umur: ""
          };
     }
 
     //handle, when user input. handle will callback and set State in this.state (using set).
     setValue = el => {
+        const {umur, tanggalLahir} = this.state
         console.log([el.target.name]);
         console.log(el.target.value);
         console.log("a",el)
         this.setState({
             [el.target.name]: el.target.value
         })
+        if (this.state.tanggalLahir != ""){
+            console.log("BABANA", "masukkk")
+            console.log(tanggalLahir)
+            const umurx = new Date(tanggalLahir)
+            const tahunIni= new Date()
+            var age = tahunIni.getFullYear() - umurx.getFullYear();
+            const umurs = age
+            console.log("ini umur : ",umur)
+            this.setState({
+                umur: umurs
+            })
+        }
+        console.log(this.state)
     }
 
     render() { 
-        const {fullname, tanggalLahir, tempatLahir, gender, hobby, alamat, agama} = this.state
+        const {fullname, tanggalLahir, tempatLahir, gender, hobby, alamat, agama, umur} = this.state
         return (
                 <div className="form">
                     <div className="field">
@@ -80,7 +95,7 @@ class Form extends Component {
                         <Label className="label" htmlFor="alamat">Alamat :</Label>
                         <Input className="inputAlamat" type="text" name="alamat" id="alamat" onChange={this.setValue} placeholder="Input Your Address" />
                     </div>
-                    <button type="submit" onClick={() => this.props.save({fullname, tanggalLahir, tempatLahir, gender, hobby, alamat, agama})} className="button" id="button" value="Submit" >Submit</button>
+                    <button type="submit" onClick={() => this.props.save({fullname, tanggalLahir, tempatLahir, gender, hobby, alamat, agama, umur})} className="button" id="button" value="Submit" >Submit</button>
                 </div>
          );
     }

@@ -38,7 +38,7 @@ class TableForm extends Component {
                                     <td>{idx + 1}</td>
                                     <td>{user.fullname}</td>
                                     <td>{user.tempatLahir}, {user.tanggalLahir}</td>
-                                    <td>-belum provide-</td>
+                                    <td>{user.umur}</td>
                                     <td>{user.gender}</td>
                                     <td>{user.hobby}</td>
                                     <td>{user.agama}</td>
