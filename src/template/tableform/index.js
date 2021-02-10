@@ -9,10 +9,6 @@ class TableForm extends Component {
          }
     }
 
-    delete=(index)=>{
-        this.props.needindex(index)
-    }
-
     render() {
         return (
             <table id="customers" cellSpacing="0" border="1">
@@ -51,10 +47,10 @@ class TableForm extends Component {
                                     <td>{user.agama}</td>
                                     <td>{user.alamat}</td>
                                     <td>
-                                        <button className="buttonedit" type="button" onclick="editClicked(${people[j].id})">
+                                        <button className="buttonedit" type="button" onClick={()=>this.props.update(idx)}>
                                             Edit
                                         </button>
-                                        <button className="buttondelete" type="button" onClick={()=>this.delete(idx)}>
+                                        <button className="buttondelete" type="button" onClick={()=>this.props.needindex(idx)}>
                                             delete
                                         </button>
                                     </td>

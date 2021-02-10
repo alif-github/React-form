@@ -15,6 +15,7 @@ class Form extends Component {
             alamat: "",
             agama: "",
             umur: "",
+            update: false
          };
     }
 
@@ -30,13 +31,15 @@ class Form extends Component {
         if (this.state.tanggalLahir != ""){
             console.log("BABANA", "masukkk")
             console.log(tanggalLahir)
-            const umurx = new Date(tanggalLahir)
-            const tahunIni= new Date()
-            var year = 0;
+            let umurx = new Date(tanggalLahir)
+            let tahunIni= new Date()
+            let year = 0
             if (umurx.getMonth() < tahunIni.getMonth()) {
-                year = 1;
+                console.log('masuk perhitungan bulan')
+                year = 1
             }
             else if ((umurx.getMonth() === tahunIni.getMonth()) && umurx.getDate() < tahunIni.getDate()) {
+                console.log('masuk perhitungan hari dan bulan')
                 year = 1;
             } 
             var age = tahunIni.getFullYear() - umurx.getFullYear() - year;
@@ -49,38 +52,70 @@ class Form extends Component {
     }
 
     setHobby = el => {
+        
+        let index = -1
         if (el.target.checked === true) {
-            this.state.hobby.push(el.target.value + " ")
+            let tempHobby = this.state.hobby
+            console.log("ini hobby test", tempHobby)
+            index = tempHobby.indexOf(el.target.value)
+            console.log("ini array hobby",tempHobby)
+            if (index < 0) {
+                this.state.hobby.push(el.target.value)
+            }
+            let indexing = tempHobby.indexOf(el.target.value)
+            console.log("ini index nya yang baru masuk", indexing)
         } else {
-            this.state.hobby.splice(el.target.value, 1)
+            let tempHobby2 = this.state.hobby
+            index = tempHobby2.indexOf(el.target.value)
+            if (index >= 0) {
+                tempHobby2.splice(index, 1)
+            }
         }
         console.log("testing : ",this.state)
     }
 
-    render() { 
+    render() {
+        console.log(this.props.edit)
+
+        const prop = this.props.edit
+
+        if ("fullname" in this.props.edit) {
+            this.setState({
+                fullname: prop.fullname,
+                tanggalLahir: prop.tanggalLahir,
+                tempatLahir: prop.tempatLahir,
+                gender: prop.gender,
+                hobby: prop.hobby,
+                alamat: prop.alamat,
+                agama: prop.agama,
+                umur: prop.umur
+            })
+            this.props.reset()
+        }
+
         const {fullname, tanggalLahir, tempatLahir, gender, hobby, alamat, agama, umur} = this.state
         return (
                 <div className="form">
                     <div className="field">
                         {/* Input Full user Name */}
                         <Label className="label" htmlFor="name">Nama :</Label>
-                        <Input className="inputNama" type="text" name="fullname" onChange={this.setValue} id="nama" placeholder="Input Your Name..." />
+                        <Input className="inputNama" value={this.state.fullname} type="text" name="fullname" onChange={this.setValue} id="nama" placeholder="Input Your Name..." />
                     </div>
                     <div className="infoBirth">
                         {/* Input Full tanggal lahir */}
                         <div className="field fieldBirth1">
                             <Label className="label" htmlFor="ttl">Tanggal Lahir :</Label>
-                            <Input className="inputTtl" type="date" name="tanggalLahir" onChange={this.setValue} id="ttl" />
+                            <Input className="inputTtl" value={this.props.edit.tanggalLahir} type="date" name="tanggalLahir" onChange={this.setValue} id="ttl" />
                         </div>
                         {/* Input Full tempat lahir */}
                         <div className="field fieldBirth2">
                             <Label className="label" htmlFor="tempatLahir">Tempat Lahir :</Label>
-                            <Input className="inputTempat" type="text" name="tempatLahir" onChange={this.setValue} id="tempatLahir" placeholder="Cth.Jakarta" />
+                            <Input className="inputTempat" value={this.props.edit.tempatLahir} type="text" name="tempatLahir" onChange={this.setValue} id="tempatLahir" placeholder="Cth.Jakarta" />
                         </div>
                     </div>
                     <div className="field">
                         <Label className="label" htmlFor="jenisKelamin">Jenis Kelamin : </Label>
-                        <Input type="radio" id="male" className="jenisKelamin" name="gender" value="Male" onChange={this.setValue}/>
+                        <Input type="radio" id="male" className="jenisKelamin" name="gender" value="Male" onChange={this.setValue} checked={gender==="Male"?"check"}/>
                         <Label className="jenisKelamin" htmlFor="male">Male</Label>
                         <Input type="radio" id="female" className="jenisKelamin" name="gender" value="Female" onChange={this.setValue}/>
                         <Label className="jenisKelamin" htmlFor="female">Female</Label>

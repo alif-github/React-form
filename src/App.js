@@ -6,7 +6,23 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      users:[]
+      users:[
+        {
+          fullname: "Alif",
+          tanggalLahir: "2020-11-12",
+          tempatLahir: "Jakarta",
+          gender: "Male",
+          hobby: [
+            "berenang"
+          ],
+          alamat: "Bekasi",
+          agama: "Islam",
+          umur: "21",
+        }
+      ],
+      editPeople:{},
+      toggleChange: 0,
+      index: ""
      }
   }
 
@@ -15,12 +31,10 @@ class App extends Component {
     console.log(this.state);
     const {fullname, tanggalLahir, tempatLahir, gender, hobby, alamat, agama, umur} = user
     let newUsers = this.state.users
-    newUsers.push({
-        fullname, tanggalLahir, tempatLahir, gender, hobby, alamat, agama, umur
-    })
 
-
-    if(
+    if (this.state.toggleChange === 0) {
+      console.log("ini submit")
+      if(
         //validation success
         //that is condition 'if' , if state fill in (good)
         user.fullname !== "" && 
@@ -28,19 +42,40 @@ class App extends Component {
         user.tempatLahir !== "" &&
         user.agama !== ""
         ) {
-        alert('Success Added: ' + user.fullname + ' , Thank you for fullfill this form!');
-        console.log(this.state.users);
-        this.setState({
-            users: newUsers
+          alert('Success Added: ' + user.fullname + ' , Thank you for fullfill this form!');
+          newUsers.push({
+            fullname, tanggalLahir, tempatLahir, gender, hobby, alamat, agama, umur
         })
-    } else {
-        //validation not success
-        //if the state still empty or user not full fill perfectly
-        alert('Please fill all form data')
-        console.log(this.state);
+          console.log(this.state.users);
+          this.setState({
+            users: newUsers
+          })
+        } else {
+          //validation not success
+          //if the state still empty or user not full fill perfectly
+          alert('Please fill all form data')
+          console.log(this.state);
+        }
+      }
+     else {
+      console.log("ini edit")
+       let idx = this.state.index
+       newUsers[idx].fullname = fullname;
+       newUsers[idx].tanggalLahir = tanggalLahir;
+       newUsers[idx].tempatLahir = tempatLahir;
+       newUsers[idx].gender = gender;
+       newUsers[idx].hobby = hobby;
+       newUsers[idx].alamat = alamat;
+       newUsers[idx].agama = agama;
+       newUsers[idx].umur = umur;
+       this.setState({
+         user: newUsers,
+         toggleChange: 0
+       })
     }
   }
-
+  
+      
   delete = (index) => {
     let newPeople = this.state.users
     newPeople.splice(index,1)
@@ -49,12 +84,29 @@ class App extends Component {
     })
   }
 
+  update = (index) => {
+    let newPeople = this.state.users[index]
+    console.log("masuk",index)
+    this.setState({
+      editPeople: newPeople,
+      toggleChange: 1,
+      index: index
+    })
+    console.log("cek", this.state.editPeople)
+  }
+
+  reset = () => {
+    this.setState({
+      editPeople: {}
+    })
+  }
+
   render() { 
-    return ( 
+    return (
       <>
       <Header/>
-      <Form save={this.save}/>
-      <TableForm needindex={this.delete} users={this.state.users}/>
+      <Form save={this.save} edit={this.state.editPeople} reset={this.reset}/>
+      <TableForm needindex={this.delete} update={this.update} users={this.state.users}/>
       <Paggination/>
     </>
      );
